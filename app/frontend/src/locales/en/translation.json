@@ -1,6 +1,6 @@
 {
-    "pageTitle": "Azure OpenAI + AI Search",
-    "headerTitle": "Azure OpenAI + AI Search",
+    "pageTitle": "Azure AI - Code Guru",
+    "headerTitle": "Azure AI - Code Guru",
     "chat": "Chat",
     "qa": "Ask a question",
     "login": "Login",
@@ -34,20 +34,20 @@
     },
     "developerSettings": "Developer settings",
 
-    "chatEmptyStateTitle": "Chat with your data",
-    "chatEmptyStateSubtitle": "Ask anything or try an example",
+    "chatEmptyStateTitle": "To code or not to code, that is the question",
+    "chatEmptyStateSubtitle": "Actually, it's not. Just code. Ask anything or try an example",
     "defaultExamples": {
-        "1": "What is included in my Northwind Health Plus plan that is not in standard?",
-        "2": "What happens in a performance review?",
-        "3": "What does a Product Manager do?",
-        "placeholder": "Type a new question (e.g. does my plan cover annual eye exams?)"
+        "1": "How are variables declared?",
+        "2": "How are exceptions and errors handled?",
+        "3": "How are arrays defined and how are they used?",
+        "placeholder": "Type a new question (e.g. What are the basic data types available?)"
     },
-    "askTitle": "Ask your data",
+    "askTitle": "Single Question",
     "gpt4vExamples": {
         "1": "Compare the impact of interest rates and GDP in financial markets.",
         "2": "What is the expected trend for the S&P 500 index over the next five years? Compare it to the past S&P 500 performance",
         "3": "Can you identify any correlation between oil prices and stock market trends?",
-        "placeholder": "Example: Does my plan cover annual eye exams?"
+        "placeholder": "Example: What are the basic data types available?"
     },
     "generatingAnswer": "Generating answer",
     "citationWithColon": "Citation:",

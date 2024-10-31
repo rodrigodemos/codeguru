@@ -29,7 +29,7 @@ Typically, the primary backend code you'll want to customize is the `app/backend
 
 #### Chat approach
 
-The chat tab uses the approach programmed in [chatreadretrieveread.py](https://github.com/Azure-Samples/azure-search-openai-demo/blob/main/app/backend/approaches/chatreadretrieveread.py).
+The chat tab uses the approach programmed in [chatreadretrieveread.py](https://github.com/rodrigodemos/codeguru/blob/main/app/backend/approaches/chatreadretrieveread.py).
 
 1. It calls the OpenAI ChatCompletion API (with a temperature of 0) to turn the user question into a good search query.
 2. It queries Azure AI Search for search results for that query (optionally using the vector embeddings for that query).
@@ -47,7 +47,7 @@ If you followed the instructions in [docs/gpt4v.md](gpt4v.md) to enable a GPT Vi
 
 #### Ask tab
 
-The ask tab uses the approach programmed in [retrievethenread.py](https://github.com/Azure-Samples/azure-search-openai-demo/blob/main/app/backend/approaches/retrievethenread.py).
+The ask tab uses the approach programmed in [retrievethenread.py](https://github.com/rodrigodemos/codeguru/blob/main/app/backend/approaches/retrievethenread.py).
 
 1. It queries Azure AI Search for search results for the user question (optionally using the vector embeddings for that question).
 2. It then combines the search results and user question, and calls the OpenAI ChatCompletion API (with a temperature of 0.3) to answer the question based on the sources.
@@ -161,10 +161,10 @@ The search explorer works well for testing text, but is harder to use with vecto
 
 Here are additional ways for improving the search results:
 
-- Adding additional metadata to the "content" field, like the document title, so that it can be matched in the search results. Modify [searchmanager.py](https://github.com/Azure-Samples/azure-search-openai-demo/blob/main/app/backend/prepdocslib/searchmanager.py) to include more text in the `content` field.
-- Making additional fields searchable by the full text search step. For example, the "sourcepage" field is not currently searchable, but you could make that into a `SearchableField` with `searchable=True` in [searchmanager.py](https://github.com/Azure-Samples/azure-search-openai-demo/blob/main/app/backend/prepdocslib/searchmanager.py). A change like that requires [re-building the index](https://learn.microsoft.com/azure/search/search-howto-reindex#change-an-index-schema).
+- Adding additional metadata to the "content" field, like the document title, so that it can be matched in the search results. Modify [searchmanager.py](https://github.com/rodrigodemos/codeguru/blob/main/app/backend/prepdocslib/searchmanager.py) to include more text in the `content` field.
+- Making additional fields searchable by the full text search step. For example, the "sourcepage" field is not currently searchable, but you could make that into a `SearchableField` with `searchable=True` in [searchmanager.py](https://github.com/rodrigodemos/codeguru/blob/main/app/backend/prepdocslib/searchmanager.py). A change like that requires [re-building the index](https://learn.microsoft.com/azure/search/search-howto-reindex#change-an-index-schema).
 - Using function calling to search by particular fields, like searching by the filename. See this blog post on [function calling for structured retrieval](https://blog.pamelafox.org/2024/03/rag-techniques-using-function-calling.html).
-- Using a different splitting strategy for the documents, or modifying the existing ones, to improve the chunks that are indexed. You can find the currently available splitters in [textsplitter.py](https://github.com/Azure-Samples/azure-search-openai-demo/blob/main/app/backend/prepdocslib/textsplitter.py).
+- Using a different splitting strategy for the documents, or modifying the existing ones, to improve the chunks that are indexed. You can find the currently available splitters in [textsplitter.py](https://github.com/rodrigodemos/codeguru/blob/main/app/backend/prepdocslib/textsplitter.py).
 
 ### Evaluating answer quality
 

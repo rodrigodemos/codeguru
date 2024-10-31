@@ -28,7 +28,7 @@ jobs:
         with:
           command: check_broken_paths
           directory: ./
-          guide-url: 'https://github.com/Azure-Samples/azure-search-openai-demo/blob/main/CONTRIBUTING.md'
+          guide-url: 'https://github.com/rodrigodemos/codeguru/blob/main/CONTRIBUTING.md'
           github-token: ${{ secrets.GITHUB_TOKEN }}
   check-urls-locale:
     if: ${{ always() }}
@@ -46,7 +46,7 @@ jobs:
         with:
           command: check_urls_locale
           directory: ./
-          guide-url: 'https://github.com/Azure-Samples/azure-search-openai-demo/blob/main/CONTRIBUTING.md'
+          guide-url: 'https://github.com/rodrigodemos/codeguru/blob/main/CONTRIBUTING.md'
           github-token: ${{ secrets.GITHUB_TOKEN }}
   check-broken-urls:
     if: ${{ always() }}
@@ -63,5 +63,5 @@ jobs:
         with:
           command: check_broken_urls
           directory: ./
-          guide-url: 'https://github.com/Azure-Samples/azure-search-openai-demo/blob/main/CONTRIBUTING.md'
+          guide-url: 'https://github.com/rodrigodemos/codeguru/blob/main/CONTRIBUTING.md'
           github-token: ${{ secrets.GITHUB_TOKEN }}

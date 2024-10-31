@@ -38,6 +38,7 @@ class ChatReadRetrieveReadApproach(ChatApproach):
         content_field: str,
         query_language: str,
         query_speller: str,
+        # focused_developer_prompt: Optional[str],
     ):
         self.search_client = search_client
         self.openai_client = openai_client
@@ -51,14 +52,20 @@ class ChatReadRetrieveReadApproach(ChatApproach):
         self.content_field = content_field
         self.query_language = query_language
         self.query_speller = query_speller
+        # self.focused_developer_prompt = focused_developer_prompt
         self.chatgpt_token_limit = get_token_limit(chatgpt_model, default_to_minimum=self.ALLOW_NON_GPT_MODELS)
 
     @property
     def system_message_chat_conversation(self):
-        return """Assistant helps the company employees with their healthcare plan questions, and questions about the employee handbook. Be brief in your answers.
-        Answer ONLY with the facts listed in the list of sources below. If there isn't enough information below, say you don't know. Do not generate answers that don't use the sources below. If asking a clarifying question to the user would help, ask the question.
-        If the question is not in English, answer in the language used in the question.
-        Each source has a name followed by colon and the actual information, always include the source name for each fact you use in the response. Use square brackets to reference the source, for example [info1.txt]. Don't combine sources, list each source separately, for example [info1.txt][info2.pdf].
+        return """Assistant helps developers with their coding questions.
+        Answer only questions related to Fortran. 
+        If the question is from another programming language, say you only have the ability to assist with questions related to Fortran.
+        Answer with the facts listed in the list of sources below. 
+        If there isn't enough information below, call out that the answer is based on your general knowledge of the programming language. 
+        If asking a clarifying question to the user would help, ask the question.
+        Each source has a name followed by colon and the actual information, always include the source name for each fact you use in the response. 
+        Use square brackets to reference the source, for example [info1.txt]. 
+        Don't combine sources, list each source separately, for example [info1.txt][info2.pdf].
         {follow_up_questions_prompt}
         {injected_prompt}
         """

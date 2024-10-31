@@ -655,6 +655,7 @@ async def setup_clients():
         content_field=KB_FIELDS_CONTENT,
         query_language=AZURE_SEARCH_QUERY_LANGUAGE,
         query_speller=AZURE_SEARCH_QUERY_SPELLER,
+        # focused_developer_prompt=FOCUSED_DEVELOPER_PROMPT,
     )
 
     if USE_GPT4V:

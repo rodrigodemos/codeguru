@@ -191,6 +191,8 @@ def setup_file_processors(
         ".json": FileProcessor(JsonParser(), SimpleTextSplitter()),
         ".md": FileProcessor(TextParser(), sentence_text_splitter),
         ".txt": FileProcessor(TextParser(), sentence_text_splitter),
+        ".for": FileProcessor(TextParser(), sentence_text_splitter),
+        ".f90": FileProcessor(TextParser(), sentence_text_splitter),
         ".csv": FileProcessor(CsvParser(), sentence_text_splitter),
     }
     # These require either a Python package or Document Intelligence
