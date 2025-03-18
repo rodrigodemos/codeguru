@@ -1,0 +1,19 @@
+[{
+    "type": "function",
+    "function": {
+        "name": "decompose_query",
+        "description": "Decompose the query into its constituent parts",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "query_question": {
+                    "type": "string",
+                    "description": "Question that answers a portion of the query"
+                }
+            },
+            "required": ["query_question"]
+        }
+    }
+}]
+
+

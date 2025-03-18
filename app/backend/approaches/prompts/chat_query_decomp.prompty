@@ -1,0 +1,41 @@
+---
+name: Question Decomposition
+description: Break down the user's query into smaller, more specific questions that can be searched in a knowledge base.
+model:
+    api: chat
+
+sample:
+    user_query: What is param1 being used for?
+    past_messages:
+        - role: user
+          content: "Can you show me the code where param1 is being used?"
+        - role: assistant
+          content: "The code where param1 is being used is in the file 'code.py' on line 23. [code.py#L23]"
+---
+system:
+Below is a history of the conversation so far, and a new question asked by the user that needs to be answered by searching in a knowledge base.
+You have access to Azure AI Search index with thousands of documents.
+Generate a list of questions to be searched in a knowledge base.
+Only generate the questions (one per line) and nothing else.
+If the question is not in English, translate the question to English before generating the search query.
+If the user input is simple and one question is enough, return only one question.
+
+user:
+(EXAMPLE) Where is the foo-bar subroutine defined?
+
+assistant:
+foo-bar subroutine
+
+user:
+(EXAMPLE) What is pro1() used for?
+
+assistant:
+pro1() definition
+
+{% for message in past_messages %}
+{{ message["role"] }}:
+{{ message["content"] }}
+{% endfor %}
+
+user:
+Generate questions for: {{ user_query }}

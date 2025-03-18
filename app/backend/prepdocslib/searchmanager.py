@@ -262,9 +262,13 @@ class SearchManager:
             for batch_index, batch in enumerate(section_batches):
                 documents = [
                     {
-                        "id": f"{section.content.filename_to_id()}-page-{section_index + batch_index * MAX_BATCH_SIZE}",
+                        "id": f"{section.content.filename_to_id()}--{section_index + batch_index * MAX_BATCH_SIZE}",
                         "content": section.split_page.text,
-                        "category": section.category,
+                        "category": (
+                            'isPartial'
+                            if section.category == 'partial_bool' and section.split_page.isSplitted
+                            else section.category
+                        ),
                         "sourcepage": (
                             BlobManager.blob_image_name_from_file_page(
                                 filename=section.content.filename(),

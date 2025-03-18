@@ -1,0 +1,24 @@
+Please identify the attribute values needed for a KB search.
+The output should be in JSON format and must include at least one of the following attributes: search_query or file_filter.
+Only include file_filter if the input specifically asks to narrow the search to a specific file.
+Do NOT make things up, only include the attributes that are contextually provided in the input.
+Please follow the examples provided.  
+  
+Examples:
+
+user: What exactly is rocket.py doing?
+assistant:
+{
+    "search_query": null,
+    "file_filter": "rocket.py"
+}
+
+user: What does the run_analysis() function do?
+assistant:
+{
+    "search_query": "run_analysis()",
+    "file_filter": null
+}
+
+user: "{{$original_input}}"
+assistant:
