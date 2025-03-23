@@ -1,6 +1,7 @@
 Please identify the attribute values needed for a KB search.
 The output should be in JSON format and must include at least one of the following attributes: search_query or file_filter.
 Only include file_filter if the input specifically asks to narrow the search to a specific file.
+Do not include a file_filter unless you are absolutely sure it is the only file needed to search in.
 Do NOT make things up, only include the attributes that are contextually provided in the input.
 Please follow the examples provided.  
   
@@ -11,6 +12,13 @@ assistant:
 {
     "search_query": null,
     "file_filter": "rocket.py"
+}
+
+user: Is there a file named "decrypt" or any references to decrypt?
+assistant:
+{
+    "search_query": "decrypt",
+    "file_filter": null
 }
 
 user: What does the run_analysis() function do?
