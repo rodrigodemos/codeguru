@@ -51,6 +51,7 @@ from quart_cors import cors
 from approaches.approach import Approach
 from approaches.chatreadretrieveread import ChatReadRetrieveReadApproach
 from approaches.skplanretrieval import SKPlanRetrievalApproach
+from approaches.skreasoned import SKReasonedApproach
 from approaches.chatreadretrievereadvision import ChatReadRetrieveReadVisionApproach
 from approaches.promptmanager import PromptyManager
 from approaches.retrievethenread import RetrieveThenReadApproach
@@ -648,7 +649,8 @@ async def setup_clients():
 
     # Set up the two default RAG approaches for /ask and /chat
     # RetrieveThenReadApproach is used by /ask for single-turn Q&A
-    current_app.config[CONFIG_ASK_APPROACH] = SKPlanRetrievalApproach(
+    # current_app.config[CONFIG_ASK_APPROACH] = SKPlanRetrievalApproach(
+    current_app.config[CONFIG_ASK_APPROACH] = SKReasonedApproach(
         search_client=search_client,
         openai_client=openai_client,
         auth_helper=auth_helper,

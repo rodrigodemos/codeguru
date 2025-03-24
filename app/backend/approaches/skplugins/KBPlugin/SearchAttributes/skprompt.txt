@@ -4,6 +4,11 @@ Only include file_filter if the input specifically asks to narrow the search to 
 Do not include a file_filter unless you are absolutely sure it is the only file needed to search in.
 Do NOT make things up, only include the attributes that are contextually provided in the input.
 Please follow the examples provided.  
+Only output the JSON object, no prefixes, no additional text or explanations.
+{
+    "search_query": null,
+    "file_filter": null
+}
   
 Examples:
 
