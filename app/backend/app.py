@@ -50,6 +50,7 @@ from quart_cors import cors
 
 from approaches.approach import Approach
 from approaches.chatreadretrieveread import ChatReadRetrieveReadApproach
+from approaches.skchat import skChatApproach
 from approaches.skplanretrieval import SKPlanRetrievalApproach
 from approaches.skreasoned import SKReasonedApproach
 from approaches.chatreadretrievereadvision import ChatReadRetrieveReadVisionApproach
@@ -63,6 +64,7 @@ from config import (
     CONFIG_AUTH_CLIENT,
     CONFIG_BLOB_CONTAINER_CLIENT,
     CONFIG_CHAT_APPROACH,
+    CONFIG_CLOUD_CHAT_APPROACH,
     CONFIG_CHAT_HISTORY_BROWSER_ENABLED,
     CONFIG_CHAT_HISTORY_COSMOS_ENABLED,
     CONFIG_CHAT_VISION_APPROACH,
@@ -184,7 +186,7 @@ async def ask(auth_claims: Dict[str, Any]):
         if use_gpt4v and CONFIG_ASK_VISION_APPROACH in current_app.config:
             approach = cast(Approach, current_app.config[CONFIG_ASK_VISION_APPROACH])
         else:
-            approach = cast(Approach, current_app.config[CONFIG_ASK_APPROACH])
+            approach = cast(Approach, current_app.config[CONFIG_CHAT_APPROACH])
         r = await approach.run(
             request_json["messages"], context=context, session_state=request_json.get("session_state")
         )
@@ -257,7 +259,10 @@ async def chat_stream(auth_claims: Dict[str, Any]):
         if use_gpt4v and CONFIG_CHAT_VISION_APPROACH in current_app.config:
             approach = cast(Approach, current_app.config[CONFIG_CHAT_VISION_APPROACH])
         else:
-            approach = cast(Approach, current_app.config[CONFIG_CHAT_APPROACH])
+            if context.get("chatType") == "local":
+                approach = cast(Approach, current_app.config[CONFIG_CHAT_APPROACH])
+            else:
+                approach = cast(Approach, current_app.config[CONFIG_CLOUD_CHAT_APPROACH])
 
         # If session state is provided, persists the session state,
         # else creates a new session_id depending on the chat history options enabled.
@@ -668,6 +673,23 @@ async def setup_clients():
 
     # ChatReadRetrieveReadApproach is used by /chat for multi-turn conversation
     current_app.config[CONFIG_CHAT_APPROACH] = ChatReadRetrieveReadApproach(
+        search_client=search_client,
+        openai_client=openai_client,
+        auth_helper=auth_helper,
+        chatgpt_model=OPENAI_CHATGPT_MODEL,
+        chatgpt_deployment=AZURE_OPENAI_CHATGPT_DEPLOYMENT,
+        embedding_model=OPENAI_EMB_MODEL,
+        embedding_deployment=AZURE_OPENAI_EMB_DEPLOYMENT,
+        embedding_dimensions=OPENAI_EMB_DIMENSIONS,
+        sourcepage_field=KB_FIELDS_SOURCEPAGE,
+        content_field=KB_FIELDS_CONTENT,
+        query_language=AZURE_SEARCH_QUERY_LANGUAGE,
+        query_speller=AZURE_SEARCH_QUERY_SPELLER,
+        prompt_manager=prompt_manager,
+    )
+
+    # ChatReadRetrieveReadApproach is used by /chat for multi-turn conversation
+    current_app.config[CONFIG_CLOUD_CHAT_APPROACH] = skChatApproach(
         search_client=search_client,
         openai_client=openai_client,
         auth_helper=auth_helper,

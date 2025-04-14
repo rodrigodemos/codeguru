@@ -72,6 +72,7 @@ export type ChatAppResponse = {
 };
 
 export type ChatAppRequestContext = {
+    chatType?: string;
     overrides?: ChatAppRequestOverrides;
 };
 

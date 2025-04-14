@@ -54,11 +54,11 @@ const Layout = () => {
                             </li>
                             <li>
                                 <NavLink
-                                    to="/qa"
+                                    to="/cloudChat"
                                     className={({ isActive }) => (isActive ? styles.headerNavPageLinkActive : styles.headerNavPageLink)}
                                     onClick={() => setMenuOpen(false)}
                                 >
-                                    {t("qa")}
+                                    {t("cloudChat")}
                                 </NavLink>
                             </li>
                         </ul>

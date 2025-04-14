@@ -396,7 +396,7 @@ requests-oauthlib==2.0.0
     # via msrest
 rich==13.9.4
     # via -r requirements.in
-semantic-kernel==1.25.0
+semantic-kernel==1.27.2
 six==1.16.0
     # via
     #   azure-core

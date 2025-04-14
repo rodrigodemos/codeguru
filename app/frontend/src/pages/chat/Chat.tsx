@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect, useContext } from "react";
+import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Helmet } from "react-helmet-async";
 import { Panel, DefaultButton } from "@fluentui/react";
@@ -86,6 +87,9 @@ const Chat = () => {
     const [showChatHistoryCosmos, setShowChatHistoryCosmos] = useState<boolean>(false);
     const audio = useRef(new Audio()).current;
     const [isPlaying, setIsPlaying] = useState(false);
+
+    const location = useLocation(); // Get the current location
+    const chatType = location.pathname === "/" ? "local" : "cloud";
 
     const speechConfig: SpeechConfig = {
         speechUrls,
@@ -186,6 +190,7 @@ const Chat = () => {
             const request: ChatAppRequest = {
                 messages: [...messages, { content: question, role: "user" }],
                 context: {
+                    chatType: chatType,
                     overrides: {
                         prompt_template: promptTemplate.length === 0 ? undefined : promptTemplate,
                         include_category: includeCategory.length === 0 ? undefined : includeCategory,
